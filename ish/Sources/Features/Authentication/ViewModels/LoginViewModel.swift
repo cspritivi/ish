@@ -59,18 +59,18 @@ class LoginViewModel: ObservableObject {
         
         Task {
             do {
-                let response = try await AuthService.shared.login(
+                _ = try await AuthService.shared.login(
                     email: email,
                     password: password
                 )
                 await MainActor.run {
                     isLoading = false
-                    // Handle successful login (save token, update UI state, etc.)
+                    // Navigate to main app screen
                 }
             } catch let error as NetworkError {
                 await MainActor.run {
                     isLoading = false
-                    errorMessage = "An unexpected error occurred"
+                    errorMessage = error.errorMessage
                     showError = true
                 }
             }

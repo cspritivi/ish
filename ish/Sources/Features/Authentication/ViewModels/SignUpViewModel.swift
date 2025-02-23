@@ -99,7 +99,7 @@ class SignUpViewModel: ObservableObject {
         
         Task {
             do {
-                let response = try await AuthService.shared.signup(
+                _ = try await AuthService.shared.signup(
                     email: email,
                     password: password,
                     firstName: firstName,
@@ -107,18 +107,12 @@ class SignUpViewModel: ObservableObject {
                 )
                 await MainActor.run {
                     isLoading = false
-                        // Handle successful signups (save token, update UI state, etc.)
+                    // Navigate to main app screen
                 }
             } catch let error as NetworkError {
                 await MainActor.run {
                     isLoading = false
                     errorMessage = error.errorMessage
-                    showError = true
-                }
-            } catch {
-                await MainActor.run {
-                    isLoading = false
-                    errorMessage = "An unexpected error occurred"
                     showError = true
                 }
             }
