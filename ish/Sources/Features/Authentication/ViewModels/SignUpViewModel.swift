@@ -107,7 +107,6 @@ class SignUpViewModel: ObservableObject {
                 )
                 await MainActor.run {
                     isLoading = false
-                    // Navigate to main app screen
                 }
             } catch let error as NetworkError {
                 await MainActor.run {
