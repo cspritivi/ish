@@ -21,6 +21,20 @@ struct AccountView: View {
                 Text("User since \(viewModel.formatDate(creationDate))")
                     .foregroundColor(.gray)
             }
+
+            NavigationLink(destination: MeasurementListView()) {
+                HStack {
+                    Image(systemName: "ruler")
+                        .foregroundColor(.white)
+                    Text("My Measurements")
+                        .foregroundColor(.white)
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(10)
+            }
+            .padding(.horizontal)
             
             Button(action: viewModel.signOut) {
                 Text("Log Out")

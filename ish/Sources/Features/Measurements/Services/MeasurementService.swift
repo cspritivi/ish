@@ -27,4 +27,8 @@ class MeasurementService {
         
         return try snapshot.documents.map { try Measurements.from($0) }
     }
+    
+    func deleteMeasurement(id: String) async throws {
+        try await db.collection("measurements").document(id).delete()
+    }
 }
