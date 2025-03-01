@@ -108,6 +108,7 @@ class AuthService: ObservableObject {
             
             await MainActor.run {
                 self.currentUser = user
+                self.isAuthenticated = true
             }
             return user
         } catch {
