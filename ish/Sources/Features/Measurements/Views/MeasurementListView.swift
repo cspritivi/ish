@@ -13,7 +13,6 @@ struct MeasurementListView: View {
     @State private var showAddNew = false
     
     var body: some View {
-        NavigationView {
             Group {
                 if viewModel.isLoading {
                     ProgressView("Loading measurements...")
@@ -79,7 +78,10 @@ struct MeasurementListView: View {
             .refreshable {
                 viewModel.fetchMeasurements()
             }
-        }
     }
+}
+
+#Preview {
+    MeasurementListView()
 }
 

@@ -12,11 +12,11 @@ struct ContentView: View {
     @StateObject private var authService = AuthService.shared
     
     var body: some View {
-        Group {
-            if authService.isAuthenticated {
-                AccountView()
-            } else {
-                NavigationView {
+        NavigationView {
+            Group {
+                if authService.isAuthenticated {
+                    AccountView()
+                } else {
                     LoginView()
                 }
             }

@@ -77,7 +77,10 @@ struct MeasurementFormView: View {
                     }
                 }
                 
-                Button(action: viewModel.saveMeasurements) {
+                Button(action: {
+                    viewModel.saveMeasurements()
+                    dismiss()
+                }) {
                     if viewModel.isLoading {
                         ProgressView()
                     } else {
