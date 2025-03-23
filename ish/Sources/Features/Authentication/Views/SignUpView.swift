@@ -15,9 +15,7 @@ struct SignUpView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Create Account")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+            LogoView(size: 80, padding: 10)
             
             // First Name Field
             VStack(alignment: .leading) {
@@ -133,6 +131,7 @@ struct SignUpView: View {
         } message: {
             Text(viewModel.errorMessage)
         }
+        .toolbar(.hidden)
     }
 }
 

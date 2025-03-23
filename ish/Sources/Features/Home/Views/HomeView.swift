@@ -83,7 +83,8 @@ struct HomeView: View {
                             NavigationLink(destination: MeasurementListView()) {
                                 QuickActionCard(
                                     icon: "ruler",
-                                    title: "Measurements"
+                                    title: "Measurements",
+                                    isNavigationLink: true
                                 )
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -95,10 +96,21 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("ish")
             .sheet(isPresented: $showNewOrder) {
                 OrderCreationView()
             }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    LogoView(size: 40, padding: 0)
+                        .padding(.top, 5)
+                }
+            }
+            .navigationTitle("Home")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
+}
+
+#Preview {
+    HomeView()
 }

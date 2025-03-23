@@ -337,8 +337,64 @@ struct StyleCustomizationsSection : View {
     }
 }
 
-struct MeasurementsSection : View {
-    let viewModel: OrderDetailViewModel
+//struct MeasurementsSection : View {
+//    let viewModel: OrderDetailViewModel
+//    
+//    var body: some View {
+//        VStack(alignment: .leading, spacing: 12) {
+//            Text("Measurements")
+//                .font(.headline)
+//            
+//            Divider()
+//            
+//            if viewModel.isLoading {
+//                ProgressView()
+//                    .padding()
+//            } else if let measurements = viewModel.measurements {
+//                VStack(alignment: .leading, spacing: 8) {
+//                    LabeledContent("Profile", value: measurements.profileName)
+//                        .font(.subheadline)
+//                    
+//                    Divider()
+//                    
+//                    LabeledContent("Chest", value: String(format: "%.1f in", measurements.chest))
+//                        .font(.subheadline)
+//                    
+//                    LabeledContent("Waist", value: String(format: "%.1f in", measurements.waist))
+//                        .font(.subheadline)
+//                    
+//                    LabeledContent("Hips", value: String(format: "%.1f in", measurements.hips))
+//                        .font(.subheadline)
+//                    
+//                    LabeledContent("Inseam", value: String(format: "%.1f in", measurements.inseam))
+//                        .font(.subheadline)
+//                    
+//                    LabeledContent("Shoulder", value: String(format: "%.1f in", measurements.shoulder))
+//                        .font(.subheadline)
+//                    
+//                    LabeledContent("Sleeve", value: String(format: "%.1f in", measurements.sleeve))
+//                        .font(.subheadline)
+//                    
+//                    LabeledContent("Neck", value: String(format: "%.1f in", measurements.neck))
+//                        .font(.subheadline)
+//                }
+//            } else {
+//                Text("Measurement profile not found")
+//                    .font(.subheadline)
+//                    .foregroundColor(.gray)
+//                    .padding(.vertical, 8)
+//            }
+//        }
+//        .padding()
+//        .background(Color(.systemBackground))
+//        .cornerRadius(12)
+//        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+//        
+//    }
+//}
+
+struct MeasurementsSection: View {
+    @ObservedObject var viewModel: OrderDetailViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -348,8 +404,12 @@ struct MeasurementsSection : View {
             Divider()
             
             if viewModel.isLoading {
-                ProgressView()
-                    .padding()
+                HStack {
+                    Spacer()
+                    ProgressView("Loading measurements...")
+                    Spacer()
+                }
+                .padding(.vertical, 20)
             } else if let measurements = viewModel.measurements {
                 VStack(alignment: .leading, spacing: 8) {
                     LabeledContent("Profile", value: measurements.profileName)
@@ -378,8 +438,27 @@ struct MeasurementsSection : View {
                     LabeledContent("Neck", value: String(format: "%.1f in", measurements.neck))
                         .font(.subheadline)
                 }
+            } else if viewModel.measurementNotFound {
+                VStack(spacing: 8) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .font(.system(size: 24))
+                        .foregroundColor(.orange)
+                        .padding(.bottom, 4)
+                    
+                    Text("Measurement profile not found")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("Measurement ID: \(viewModel.order.measurementsId)")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .padding(.top, 4)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
             } else {
-                Text("Measurement profile not found")
+                Text("Could not load measurement information")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .padding(.vertical, 8)
@@ -389,7 +468,6 @@ struct MeasurementsSection : View {
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
-        
     }
 }
 

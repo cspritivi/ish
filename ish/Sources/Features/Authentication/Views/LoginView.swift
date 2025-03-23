@@ -13,9 +13,7 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 20) {
             // Logo or App Name
-            Text("Welcome Back")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+            LogoView(size: 80, padding: 10)
             
             // Email field
             VStack(alignment: .leading) {

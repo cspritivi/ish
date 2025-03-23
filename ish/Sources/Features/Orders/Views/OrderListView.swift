@@ -28,6 +28,7 @@ struct OrderListView: View {
             }
         }
         .navigationTitle("My Orders")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showNewOrder = true }) {
@@ -193,5 +194,11 @@ struct OrdersList: View {
         .refreshable {
             viewModel.fetchOrders()
         }
+    }
+}
+
+#Preview {
+    NavigationView {
+        OrderListView()
     }
 }

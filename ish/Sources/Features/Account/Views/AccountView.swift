@@ -68,7 +68,7 @@ struct AccountView: View {
                         .background(Color.red)
                         .cornerRadius(10)
                 }
-                .padding(.horizontal)
+                .padding(10)
             }
             .padding()
             .navigationTitle("Account")

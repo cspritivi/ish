@@ -1,10 +1,3 @@
-//
-//  OrderDetailViewModel.swift
-//  ish
-//
-//  Created by Pritivi S Chhabria on 3/2/25.
-//
-
 // ish/Sources/Features/Orders/ViewModels/OrderDetailViewModel.swift
 import Foundation
 import FirebaseAuth
@@ -19,36 +12,53 @@ class OrderDetailViewModel: ObservableObject {
     @Published var showError = false
     @Published var showConfirmationDialog = false
     @Published var showSuccessMessage = false
+    @Published var measurementNotFound = false
     
     init(order: Order) {
         self.order = order
+//        print("OrderDetailViewModel initialized with measurementsId: \(order.measurementsId)")
         fetchMeasurements()
     }
     
     func fetchMeasurements() {
+        guard !order.measurementsId.isEmpty else {
+//            print("Error: MeasurementsId is empty")
+            measurementNotFound = true
+            isLoading = false
+            return
+        }
+        
         isLoading = true
+//        print("Fetching measurements with ID: \(order.measurementsId)")
         
         Task {
             do {
-                let snapshot = try await FirebaseFirestore.Firestore.firestore()
-                    .collection("measurements")
-                    .document(order.measurementsId)
-                    .getDocument()
+                let db = Firestore.firestore()
+                let docRef = db.collection("measurements").document(order.measurementsId)
+//                print("Requesting document at path: \(docRef.path)")
+                
+                let snapshot = try await docRef.getDocument()
                 
                 if snapshot.exists {
+//                    print("Document exists, parsing data")
                     let measurements = try Measurements.from(snapshot)
+                    
                     await MainActor.run {
+//                        print("Measurements loaded successfully: \(measurements.profileName)")
                         self.measurements = measurements
                         self.isLoading = false
                     }
                 } else {
+//                    print("Document does not exist")
                     await MainActor.run {
+                        self.measurementNotFound = true
                         self.isLoading = false
                     }
                 }
             } catch {
+//                print("Error fetching measurements: \(error.localizedDescription)")
                 await MainActor.run {
-                    self.errorMessage = error.localizedDescription
+                    self.errorMessage = "Failed to load measurements: \(error.localizedDescription)"
                     self.showError = true
                     self.isLoading = false
                 }
