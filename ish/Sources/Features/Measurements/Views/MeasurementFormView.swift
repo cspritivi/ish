@@ -19,61 +19,40 @@ struct MeasurementFormView: View {
                     TextField("Profile Name (e.g., Formal Wear)", text: $viewModel.profileName)
                 }
                 
+                Picker("Garment Type", selection: $viewModel.measurementCategory) {
+                    ForEach(MeasurementCategory.allCases) { category in
+                        Text(category.rawValue).tag(category)
+                    }
+                }
+                
                 Section(header: Text("Measurements (inches)")) {
-                    HStack {
-                        Text("Chest")
-                        Spacer()
-                        TextField("", value: $viewModel.chest, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
+                    
+                    MeasurementFormItemView(title: "Waist", value: $viewModel.waist)
+                    
+                    if viewModel.measurementCategory == .suit {
+                        MeasurementFormItemView(title: "Back", value: $viewModel.back)
                     }
                     
-                    HStack {
-                        Text("Waist")
-                        Spacer()
-                        TextField("", value: $viewModel.waist, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
+                    if viewModel.measurementCategory == .suit || viewModel.measurementCategory == .shirt {
+                        MeasurementFormItemView(title: "Chest", value: $viewModel.chest)
+                        MeasurementFormItemView(title: "Shoulder", value: $viewModel.shoulder)
+                        MeasurementFormItemView(title: "Sleeve", value: $viewModel.sleeve)
+                        MeasurementFormItemView(title: "Hips", value: $viewModel.hips)
+                        MeasurementFormItemView(title: "Neck", value: $viewModel.neck)
                     }
                     
-                    HStack {
-                        Text("Hips")
-                        Spacer()
-                        TextField("", value: $viewModel.hips, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
+                    if viewModel.measurementCategory == .shirt {
+                        MeasurementFormItemView(title: "Shirt Length", value: $viewModel.shirtLength)
                     }
                     
-                    HStack {
-                        Text("Inseam")
-                        Spacer()
-                        TextField("", value: $viewModel.inseam, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
-                    }
-                    
-                    HStack {
-                        Text("Shoulder")
-                        Spacer()
-                        TextField("", value: $viewModel.shoulder, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
-                    }
-                    
-                    HStack {
-                        Text("Sleeve")
-                        Spacer()
-                        TextField("", value: $viewModel.sleeve, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
-                    }
-                    
-                    HStack {
-                        Text("Neck")
-                        Spacer()
-                        TextField("", value: $viewModel.neck, format: .number)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
+                    if viewModel.measurementCategory == .pant {
+                        MeasurementFormItemView(title: "Inseam", value: $viewModel.inseam)
+                        MeasurementFormItemView(title: "Outseam", value: $viewModel.outseam)
+                        MeasurementFormItemView(title: "Thigh", value: $viewModel.thigh)
+                        MeasurementFormItemView(title: "Knee", value: $viewModel.knee)
+                        MeasurementFormItemView(title: "Cuff", value: $viewModel.cuff)
+                        MeasurementFormItemView(title: "Front Rise", value: $viewModel.frontRise)
+                        MeasurementFormItemView(title: "Back Rise", value: $viewModel.backRise)
                     }
                 }
                 

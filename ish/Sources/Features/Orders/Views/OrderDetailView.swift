@@ -417,26 +417,33 @@ struct MeasurementsSection: View {
                     
                     Divider()
                     
-                    LabeledContent("Chest", value: String(format: "%.1f in", measurements.chest))
-                        .font(.subheadline)
+                    LabeledContent("Waist", value: String(format: "%.1f", measurements.waist ?? -1)).font(.subheadline)
                     
-                    LabeledContent("Waist", value: String(format: "%.1f in", measurements.waist))
-                        .font(.subheadline)
+                    if measurements.measurementCategory == .shirt || measurements.measurementCategory == .suit {
+                        LabeledContent("Chest", value: String(format: "%.1f", measurements.chest ?? -1)).font(.subheadline)
+                        LabeledContent("Shoulder", value: String(format: "%.1f", measurements.shoulder ?? -1)).font(.subheadline)
+                        LabeledContent("Sleeve", value: String(format: "%.1f", measurements.sleeve ?? -1)).font(.subheadline)
+                        LabeledContent("Hips", value: String(format: "%.1f", measurements.hips ?? -1)).font(.subheadline)
+                        LabeledContent("Neck", value: String(format: "%.1f", measurements.neck ?? -1)).font(.subheadline)
+                    }
                     
-                    LabeledContent("Hips", value: String(format: "%.1f in", measurements.hips))
-                        .font(.subheadline)
+                    if measurements.measurementCategory == .suit {
+                        LabeledContent("Back", value: String(format: "%.1f", measurements.back ?? -1)).font(.subheadline)
+                    }
                     
-                    LabeledContent("Inseam", value: String(format: "%.1f in", measurements.inseam))
-                        .font(.subheadline)
+                    if measurements.measurementCategory == .shirt {
+                        LabeledContent("Shirt Length", value: String(format: "%.1f", measurements.shirtLength ?? -1)).font(.subheadline)
+                    }
                     
-                    LabeledContent("Shoulder", value: String(format: "%.1f in", measurements.shoulder))
-                        .font(.subheadline)
-                    
-                    LabeledContent("Sleeve", value: String(format: "%.1f in", measurements.sleeve))
-                        .font(.subheadline)
-                    
-                    LabeledContent("Neck", value: String(format: "%.1f in", measurements.neck))
-                        .font(.subheadline)
+                    if measurements.measurementCategory == .pant {
+                        LabeledContent("Inseam", value: String(format: "%.1f", measurements.inseam ?? -1)).font(.subheadline)
+                        LabeledContent("Outseam", value: String(format: "%.1f", measurements.outseam ?? -1)).font(.subheadline)
+                        LabeledContent("Thigh", value: String(format: "%.1f", measurements.thigh ?? -1)).font(.subheadline)
+                        LabeledContent("Knee", value: String(format: "%.1f", measurements.knee ?? -1)).font(.subheadline)
+                        LabeledContent("Cuff", value: String(format: "%.1f", measurements.cuff ?? -1)).font(.subheadline)
+                        LabeledContent("Front Rise", value: String(format: "%.1f", measurements.frontRise ?? -1)).font(.subheadline)
+                        LabeledContent("Back Rise", value: String(format: "%.1f", measurements.backRise ?? -1)).font(.subheadline)
+                    }
                 }
             } else if viewModel.measurementNotFound {
                 VStack(spacing: 8) {
