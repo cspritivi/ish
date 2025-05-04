@@ -56,7 +56,7 @@ struct StyleCustomizationView: View {
                 viewModel.selectedChoices = styleChoices
             }
         }
-        .onChange(of: viewModel.selectedChoices) { _ in
+        .onChange(of: viewModel.selectedChoices) {
             styleChoices = viewModel.selectedChoices
         }
         .alert("Error", isPresented: $viewModel.showError) {

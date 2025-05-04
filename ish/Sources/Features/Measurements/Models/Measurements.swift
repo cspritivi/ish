@@ -18,7 +18,6 @@ struct Measurements: Codable, Identifiable {
     let chest: Double?
     let shoulder: Double?
     let sleeve: Double?
-    let hips: Double?
     let neck: Double?
     
     // For Suit
@@ -26,6 +25,7 @@ struct Measurements: Codable, Identifiable {
     
     // For Suit, Shirt, and Pant
     let waist: Double?
+    let hips: Double?
 
     // For Shirt
     let shirtLength: Double?
@@ -81,6 +81,9 @@ extension Measurements {
                 "outseam" : outseam!,
                 "thigh" : thigh!,
                 "knee" : knee!,
+                "cuff" : cuff!,
+                "frontRise" : frontRise!,
+                "backRise" : backRise!,
                 "createdAt" : createdAt,
                 "updatedAt" : updatedAt
             ]

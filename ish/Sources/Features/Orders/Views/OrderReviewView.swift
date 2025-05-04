@@ -331,7 +331,7 @@ struct OrderReviewView: View {
             }
             .padding()
         }
-        .onChange(of: viewModel.orderPlaced) { placed in
+        .onChange(of: viewModel.orderPlaced) { was, placed in
             if placed, let orderId = viewModel.savedOrderId {
                 onOrderPlaced(orderId)
             }

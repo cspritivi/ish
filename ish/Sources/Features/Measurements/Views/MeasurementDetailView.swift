@@ -23,12 +23,12 @@ struct MeasurementDetailView: View {
             Section(header: Text("Measurements (inches)")) {
                 
                 LabeledContent("Waist", value: String(format: "%.1f", measurement.waist ?? -1))
+                LabeledContent("Hips", value: String(format: "%.1f", measurement.hips ?? -1))
                 
                 if measurement.measurementCategory == .shirt || measurement.measurementCategory == .suit {
                     LabeledContent("Chest", value: String(format: "%.1f", measurement.chest ?? -1))
                     LabeledContent("Shoulder", value: String(format: "%.1f", measurement.shoulder ?? -1))
                     LabeledContent("Sleeve", value: String(format: "%.1f", measurement.sleeve ?? -1))
-                    LabeledContent("Hips", value: String(format: "%.1f", measurement.hips ?? -1))
                     LabeledContent("Neck", value: String(format: "%.1f", measurement.neck ?? -1))
                 }
                 

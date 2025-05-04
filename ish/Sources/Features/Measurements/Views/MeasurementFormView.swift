@@ -28,6 +28,7 @@ struct MeasurementFormView: View {
                 Section(header: Text("Measurements (inches)")) {
                     
                     MeasurementFormItemView(title: "Waist", value: $viewModel.waist)
+                    MeasurementFormItemView(title: "Hips", value: $viewModel.hips)
                     
                     if viewModel.measurementCategory == .suit {
                         MeasurementFormItemView(title: "Back", value: $viewModel.back)
@@ -37,7 +38,6 @@ struct MeasurementFormView: View {
                         MeasurementFormItemView(title: "Chest", value: $viewModel.chest)
                         MeasurementFormItemView(title: "Shoulder", value: $viewModel.shoulder)
                         MeasurementFormItemView(title: "Sleeve", value: $viewModel.sleeve)
-                        MeasurementFormItemView(title: "Hips", value: $viewModel.hips)
                         MeasurementFormItemView(title: "Neck", value: $viewModel.neck)
                     }
                     

@@ -418,12 +418,12 @@ struct MeasurementsSection: View {
                     Divider()
                     
                     LabeledContent("Waist", value: String(format: "%.1f", measurements.waist ?? -1)).font(.subheadline)
+                    LabeledContent("Hips", value: String(format: "%.1f", measurements.hips ?? -1)).font(.subheadline)
                     
                     if measurements.measurementCategory == .shirt || measurements.measurementCategory == .suit {
                         LabeledContent("Chest", value: String(format: "%.1f", measurements.chest ?? -1)).font(.subheadline)
                         LabeledContent("Shoulder", value: String(format: "%.1f", measurements.shoulder ?? -1)).font(.subheadline)
                         LabeledContent("Sleeve", value: String(format: "%.1f", measurements.sleeve ?? -1)).font(.subheadline)
-                        LabeledContent("Hips", value: String(format: "%.1f", measurements.hips ?? -1)).font(.subheadline)
                         LabeledContent("Neck", value: String(format: "%.1f", measurements.neck ?? -1)).font(.subheadline)
                     }
                     
